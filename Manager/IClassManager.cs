@@ -3,11 +3,11 @@ using CodeFirstEFCore.Entities;
 
 namespace CodeFirstEFCore.Manager
 {
-    public interface ICourseManager
+    public interface IClassManager
     {
-        IQueryable<Course> get();
-        void add(Course course);
-        void update(Course course);
+        IQueryable<Class> get();
+        void add(Class cls);
+        void update(Class cls);
         void delete(int id);
         void SaveChange();
     }

@@ -1,5 +1,6 @@
 using CodeFirstEFCore.Context;
 using CodeFirstEFCore.Manager;
+using CodeFirstEFCore.Service;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -32,7 +33,14 @@ namespace CodeFirstEFCore
                 configuration.RootPath = "ClientApp/dist";
             });
 
+            // DI Register
             services.AddScoped<ICourseManager, CourseManager>();
+            services.AddScoped<ITeacherManager, TeacherManager>();
+            services.AddScoped<IStudentManager, StudentManager>();
+            services.AddScoped<IClassManager, ClassManager>();
+            services.AddScoped<ICourseService, CourseService>();
+            services.AddScoped<ITeacherService, TeacherService>();
+            services.AddScoped<IStudentService, StudentService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
