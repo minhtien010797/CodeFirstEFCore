@@ -38,9 +38,13 @@ namespace CodeFirstEFCore
             services.AddScoped<ITeacherManager, TeacherManager>();
             services.AddScoped<IStudentManager, StudentManager>();
             services.AddScoped<IClassManager, ClassManager>();
+            services.AddScoped<IStudentFailedManager, StudentFailedManager>();
+
             services.AddScoped<ICourseService, CourseService>();
             services.AddScoped<ITeacherService, TeacherService>();
             services.AddScoped<IStudentService, StudentService>();
+            services.AddScoped<IClassService, ClassService>();
+            services.AddScoped<IStudentFailedService, StudentFailedService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

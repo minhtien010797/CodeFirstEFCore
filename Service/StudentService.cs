@@ -3,6 +3,7 @@ using System.Linq;
 using CodeFirstEFCore.Entities;
 using CodeFirstEFCore.Manager;
 using CodeFirstEFCore.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace CodeFirstEFCore.Service
 {
@@ -15,7 +16,7 @@ namespace CodeFirstEFCore.Service
         }
         public bool add(StudentResource student)
         {
-             _studentManager.add(new Student
+            _studentManager.add(new Student
             {
                 FirstName = student.FirstName,
                 LastName = student.LastName,
@@ -47,12 +48,12 @@ namespace CodeFirstEFCore.Service
         {
             return _studentManager.get().Where(s => s.Class.ClassName == className).Select(
                 s => new StudentResource
-            {
-                Id = s.Id,
-                FirstName = s.FirstName,
-                LastName = s.LastName,
-                Score = s.Score
-            }).ToList();
+                {
+                    Id = s.Id,
+                    FirstName = s.FirstName,
+                    LastName = s.LastName,
+                    Score = s.Score
+                }).ToList();
         }
 
         public StudentResource getById(int id)
