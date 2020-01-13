@@ -19,7 +19,7 @@ namespace CodeFirstEFCore.Controllers
         public List<StudentResource> GetAllStudents()
         {
             var studentList = _studentService.getAll();
-            return null;
+            return studentList;
         }
 
         [HttpGet("class/{className}")]
