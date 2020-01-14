@@ -3,10 +3,11 @@
 <p>This component demonstrates students data from the server.</p>
 
 <p *ngIf="!students"><em>Loading...</em></p>
-
+<app-button-crud></app-button-crud>
 <table class='table table-striped' aria-labelledby="tableLabel" *ngIf="students">
   <thead>
     <tr>
+      <th></th>
       <th>First Name</th>
       <th>Last Name</th>
       <th>Full Name</th>
@@ -15,7 +16,7 @@
   </thead>
   <tbody>
     <tr *ngFor="let student of students" class="checkbox">
-        <input type="checkbox" id="student{{student.id}}">
+      <input type="checkbox" id="student{{student.id}}">
       <td>{{ student.firstName }}</td>
       <td>{{ student.lastName }}</td>
       <td>{{ student.firstName+' '+ student.lastName  }}</td>
@@ -23,3 +24,4 @@
     </tr>
   </tbody>
 </table>
+<app-pagination></app-pagination>

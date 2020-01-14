@@ -10,6 +10,9 @@ import { HomeComponent } from './home/home.component';
 import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { StudentDataComponent } from './student-data/student-data.component';
+import { ButtonCRUDComponent } from './button-crud/button-crud.component';
+import { PaginationComponent } from './pagination/pagination.component';
+import { JwPaginationComponent } from 'jw-angular-pagination';
 
 @NgModule({
   declarations: [
@@ -18,7 +21,10 @@ import { StudentDataComponent } from './student-data/student-data.component';
     HomeComponent,
     CounterComponent,
     FetchDataComponent,
-    StudentDataComponent
+    StudentDataComponent,
+    ButtonCRUDComponent,
+    PaginationComponent,
+    JwPaginationComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -29,6 +35,8 @@ import { StudentDataComponent } from './student-data/student-data.component';
       { path: 'counter', component: CounterComponent },
       { path: 'fetch-data', component: FetchDataComponent },
       { path: 'student-data', component: StudentDataComponent },
+      { path: 'button-crud', component: ButtonCRUDComponent },
+      { path: 'pagination', component: PaginationComponent },
     ])
   ],
   providers: [],
