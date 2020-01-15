@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
   selector: 'app-student-data',
   templateUrl: './student-data.component.html',
   styleUrls: ['./student-data.component.css'], 
-   encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None
 })
 export class StudentDataComponent {
   public students: Student[];
