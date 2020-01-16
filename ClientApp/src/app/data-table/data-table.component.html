@@ -1,0 +1,16 @@
+<p *ngIf="!dataSource"><em>Loading data...</em></p>
+
+<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="dataSource">
+    <thead>
+      <tr>        
+        <th *ngFor="let column of columns">{{column.name}}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of dataSource">
+        <td *ngFor="let row of data">{{ row }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- <jw-pagination [items]="students" (changePage)="onChangePage($event)"></jw-pagination> -->

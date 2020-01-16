@@ -9,10 +9,10 @@ import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
 import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
-import { StudentDataComponent } from './student-data/student-data.component';
+import { StudentComponent } from './student/student.component';
 import { ButtonCRUDComponent } from './button-crud/button-crud.component';
-import { PaginationComponent } from './pagination/pagination.component';
 import { JwPaginationComponent } from 'jw-angular-pagination';
+import { DataTableComponent } from './data-table/data-table.component';
 
 @NgModule({
   declarations: [
@@ -21,10 +21,10 @@ import { JwPaginationComponent } from 'jw-angular-pagination';
     HomeComponent,
     CounterComponent,
     FetchDataComponent,
-    StudentDataComponent,
+    StudentComponent,
     ButtonCRUDComponent,
-    PaginationComponent,
-    JwPaginationComponent
+    JwPaginationComponent,
+    DataTableComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -34,9 +34,9 @@ import { JwPaginationComponent } from 'jw-angular-pagination';
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'counter', component: CounterComponent },
       { path: 'fetch-data', component: FetchDataComponent },
-      { path: 'student-data', component: StudentDataComponent },
+      { path: 'student', component: StudentComponent },
       { path: 'button-crud', component: ButtonCRUDComponent },
-      { path: 'pagination', component: PaginationComponent },
+      { path: 'data-table', component: DataTableComponent },
     ])
   ],
   providers: [],
