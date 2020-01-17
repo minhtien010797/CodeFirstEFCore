@@ -24,21 +24,12 @@ export class StudentComponent {
   setColumns() {
     this.columns = [
       {
-        name: '',
-        // isHide: true,
-        key: ''
-      },
-      {
         name: 'First Name',
         key: 'firstName'
       },
       {
         name: 'Last Name',
         key: 'lastName'
-      },
-      {
-        name: 'Full Name',
-        key: 'fullName'
       },
       {
         name: 'Score',
@@ -52,7 +43,7 @@ export class StudentComponent {
 
 interface ColumnHeader {
   name: string;
-  // isHide?: boolean;
+  isHide?: boolean;
   key: string;
 }
 

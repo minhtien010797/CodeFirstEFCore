@@ -1,16 +1,18 @@
-<p *ngIf="!dataSource"><em>Loading data...</em></p>
+<p *ngIf="!listData"><em>Loading data...</em></p>
 
-<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="dataSource">
-    <thead>
-      <tr>        
-        <th *ngFor="let column of columns">{{column.name}}</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let data of dataSource">
-        <td *ngFor="let row of data">{{ row }}</td>
-      </tr>
-    </tbody>
-  </table>
+<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="listData">
+  <thead>
+    <tr>        
+      <td></td>
+      <th *ngFor="let column of columns">{{column.name}}</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let data of listData">
+      <td><input type="checkbox" [(ngModel)]="data.id" [checked]=false></td> 
+      <td *ngFor="let column of columns">{{ data[column.key] ? data[column.key] : ''}}</td>
+    </tr>
+  </tbody>
+</table>
 
-  <!-- <jw-pagination [items]="students" (changePage)="onChangePage($event)"></jw-pagination> -->
+<jw-pagination [items]="dataSource" [pageSize]='3' (changePage)="onChangePage($event)"></jw-pagination>
