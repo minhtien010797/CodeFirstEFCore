@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit, OnChanges } from '@angular/core';
 
 @Component({
   selector: 'data-table',
@@ -6,16 +6,22 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./data-table.component.css']
 })
 
-export class DataTableComponent {
+export class DataTableComponent implements OnInit,OnChanges{
   @Input() dataSource: any;
   @Input() columns: any;
-
-  listData: Array<any>;
+  displayedColumns: string[] = ['firstName', 'lastName', 'score'];
+  // listData: Array<any>;
 
   constructor() {
   }
 
-  onChangePage(dataUpdate: Array<any>) {
-    this.listData = dataUpdate;
+  ngOnChanges() {
+    console.log(this.dataSource);
   }
+
+  ngOnInit() {
+  }
+  // onChangePage(dataUpdate: Array<any>) {
+  //   this.listData = dataUpdate;
+  // }
 }

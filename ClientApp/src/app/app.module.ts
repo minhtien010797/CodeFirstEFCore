@@ -13,6 +13,10 @@ import { StudentComponent } from './student/student.component';
 import { ButtonCRUDComponent } from './button-crud/button-crud.component';
 import { JwPaginationComponent } from 'jw-angular-pagination';
 import { DataTableComponent } from './data-table/data-table.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import {MaterialModule} from './material-module';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -24,12 +28,14 @@ import { DataTableComponent } from './data-table/data-table.component';
     StudentComponent,
     ButtonCRUDComponent,
     JwPaginationComponent,
-    DataTableComponent
+
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
+    MaterialModule,
+    CommonModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'counter', component: CounterComponent },
@@ -37,7 +43,8 @@ import { DataTableComponent } from './data-table/data-table.component';
       { path: 'student', component: StudentComponent },
       { path: 'button-crud', component: ButtonCRUDComponent },
       { path: 'data-table', component: DataTableComponent },
-    ])
+    ]),
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
