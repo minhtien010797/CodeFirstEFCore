@@ -50,7 +50,9 @@ import { DataTableComponent } from './data-table/data-table.component';
   ],
   imports:[
     MatTableModule,
-    CommonModule
+    CommonModule,
+    MatCheckboxModule,
+    MatPaginatorModule
   ],
   exports: [
     DataTableComponent,
