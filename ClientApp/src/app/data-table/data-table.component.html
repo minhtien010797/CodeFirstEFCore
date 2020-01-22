@@ -18,6 +18,8 @@
 <jw-pagination [items]="dataSource" [pageSize]='3' (changePage)="onChangePage($event)"></jw-pagination> -->
 
 <!-- ------------------------------------------------------------------------------------------------------------ -->
+<app-button-crud></app-button-crud>
+
 <div class="mat-elevation-z8">
   <ng-container *ngIf="listData">
     <table mat-table [dataSource]="listData">

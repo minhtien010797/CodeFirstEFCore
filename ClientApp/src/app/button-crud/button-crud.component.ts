@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-button-crud',
@@ -6,8 +6,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./button-crud.component.css']
 })
 export class ButtonCRUDComponent{
+  @Input() data: any;
+
 
   constructor() { }
+
+  add(){
+    return this.http.post()
+  }
 
   public createStudent(){
 

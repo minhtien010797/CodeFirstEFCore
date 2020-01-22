@@ -42,11 +42,11 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTreeModule} from '@angular/material/tree';
 import { CommonModule } from '@angular/common';
 import { DataTableComponent } from './data-table/data-table.component';
-
+import { ButtonCRUDComponent } from './button-crud/button-crud.component';
 
 @NgModule({
   declarations: [
-    DataTableComponent
+    DataTableComponent,ButtonCRUDComponent
   ],
   imports:[
     MatTableModule,

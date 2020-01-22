@@ -1,7 +1,8 @@
-import { Component, Input, OnInit, OnChanges, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, OnChanges, ViewChild, SimpleChange, SimpleChanges } from '@angular/core';
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { debug } from 'util';
 
 @Component({
   selector: 'data-table',
@@ -23,8 +24,8 @@ export class DataTableComponent implements OnChanges {
   constructor() {
   }
 
-  ngOnChanges() {
-    if (this.dataSource.length) {
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.dataSource) {
       this.listData = new MatTableDataSource<any>(this.dataSource);
       this.listData.paginator = this.paginator;
     }
@@ -40,11 +41,13 @@ export class DataTableComponent implements OnChanges {
     // this.isAllSelected() ?
     //     this.selection.clear() :
     //     this.dataSource.data.forEach(row => this.selection.select(row));
-    
+
     if (this.isAllSelected()) {
       this.selection.clear()
     }
-    this.dataSource.forEach((row: any) => this.selection.select(row));
+    else{
+      this.dataSource.forEach((row: any) => this.selection.select(row));
+    }
   }
 
   checkboxLabel(row?: any): string {
