@@ -38,10 +38,6 @@ export class DataTableComponent implements OnChanges {
   }
 
   masterToggle() {
-    // this.isAllSelected() ?
-    //     this.selection.clear() :
-    //     this.dataSource.data.forEach(row => this.selection.select(row));
-
     if (this.isAllSelected()) {
       this.selection.clear()
     }
