@@ -42,18 +42,25 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTreeModule} from '@angular/material/tree';
 import { CommonModule } from '@angular/common';
 import { DataTableComponent } from './data-table/data-table.component';
-import { ButtonCRUDComponent } from './button-crud/button-crud.component';
+import { ButtonCRUDComponent, DialogButtonCreate } from './button-crud/button-crud.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
-    DataTableComponent,ButtonCRUDComponent
+    DataTableComponent,
+    ButtonCRUDComponent,
+    DialogButtonCreate
   ],
   imports:[
     MatTableModule,
     CommonModule,
     MatCheckboxModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatDialogModule,
+    FormsModule,
+    MatInputModule
   ],
+  entryComponents: [ButtonCRUDComponent, DialogButtonCreate],
   exports: [
     DataTableComponent,
     A11yModule,

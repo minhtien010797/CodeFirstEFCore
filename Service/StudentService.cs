@@ -37,7 +37,6 @@ namespace CodeFirstEFCore.Service
         {
             return _studentManager.get().Select(s => new StudentResource
             {
-                Id = s.Id,
                 FirstName = s.FirstName,
                 LastName = s.LastName,
                 Score = s.Score
@@ -49,7 +48,6 @@ namespace CodeFirstEFCore.Service
             return _studentManager.get().Where(s => s.Class.ClassName == className).Select(
                 s => new StudentResource
                 {
-                    Id = s.Id,
                     FirstName = s.FirstName,
                     LastName = s.LastName,
                     Score = s.Score
@@ -61,7 +59,6 @@ namespace CodeFirstEFCore.Service
             var student = _studentManager.get().FirstOrDefault(t => t.Id == id);
             return new StudentResource
             {
-                Id = student.Id,
                 FirstName = student.FirstName,
                 LastName = student.LastName,
                 Score = student.Score
@@ -72,7 +69,6 @@ namespace CodeFirstEFCore.Service
         {
             _studentManager.update(new Student
             {
-                Id = student.Id,
                 FirstName = student.FirstName,
                 LastName = student.LastName,
                 Score = student.Score

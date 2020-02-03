@@ -1,5 +1,13 @@
 import { Component, Input, Inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+
+export interface DialogData {
+  firstName: string;
+  lastName: string;
+  score: number
+}
+
 
 @Component({
   selector: 'app-button-crud',
@@ -8,24 +16,70 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ButtonCRUDComponent{
   @Input() data: any;
+  
+  firstName: string;
+  lastName: string;
+  score: number;
+
+  dataInput: any;
 
 
-  constructor(private http: HttpClient, @Inject('BASE_URL') baseUrl: string) { }
+  private headers = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json'
+    })
+  };
 
-  add(){
-    // return this.http.post()
+  constructor(public dialog: MatDialog, private http: HttpClient, @Inject('BASE_URL') private baseUrl: string) { }
+
+  openCreateForm(): void{
+    const dialogRef = this.dialog.open(DialogButtonCreate, {
+      width: '500px',
+      data: {firstName: this.firstName, lastName: this.lastName, score: this.score}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.dataInput = result;
+      if(this.dataInput !== null)
+      {
+        this.http.post<any>(this.baseUrl + 'api/students',  this.dataInput, this.headers).subscribe(result => {
+          console.log('Add new student successfully !!!!!');
+        });
+      }
+      console.log(result);
+      debugger;
+    });
   }
+  // public editStudent(){
+  // }
+  // public deleteStudent(){
+  // }
+}
 
-  public createStudent(){
+// export class StudentModel{
+//   constructor(firstName?: string, lastName?: string, score?: number) {
 
+//     this.firstName = firstName;
+//     this.lastName = lastName;
+//     this.score = score;
+//   }
+
+//   public firstName: string;
+//   public lastName: string;
+//   public score: number;
+// }
+
+@Component({
+  selector: 'dialog-button-create',
+  templateUrl: 'dialog-button-create.html',
+})
+export class DialogButtonCreate {
+
+  constructor(
+    public dialogRef: MatDialogRef<DialogButtonCreate>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
+
+  onNoClick(): void {
+    this.dialogRef.close();
   }
-
-  public editStudent(){
-
-  }
-
-  public deleteStudent(){
-
-  }
-
 }
