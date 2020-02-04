@@ -7,12 +7,12 @@ namespace CodeFirstEFCore.Models
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public sbyte Score { get; set; }
+        public float Score { get; set; }
     }
-    public class StudentInput
-    {
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string Score { get; set; }
-    }
+    // public class StudentInput
+    // {
+    //     public string FirstName { get; set; }
+    //     public string LastName { get; set; }
+    //     public string Score { get; set; }
+    // }
 }

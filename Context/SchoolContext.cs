@@ -21,42 +21,40 @@ namespace CodeFirstEFCore.Context
         {
             base.OnModelCreating(modelBuilder);
 
-            // Fluent API relationship StudentFailed-Student
-            modelBuilder.Entity<StudentFailed>()
-            .HasOne(sf => sf.Student)
-            .WithOne(s => s.StudentFailed)
-            .HasForeignKey<StudentFailed>(sf => sf.StudentId)
-            .IsRequired();
+            //  // Fluent API relationship StudentFailed-Student
+            // modelBuilder.Entity<StudentFailed>()
+            // .HasOne(sf => sf.Student)
+            // .WithOne(s => s.StudentFailed)
+            // .HasForeignKey<StudentFailed>(sf => sf.StudentId)
+            // .IsRequired();
 
-            // Fluent API relationship Class-Teacher
-            modelBuilder.Entity<Class>()
-            .HasOne(t => t.Teacher)
-            .WithOne(c => c.Class)
-            .HasForeignKey<Teacher>(t => t.ClassId)
-            .IsRequired();
-
+            // // Fluent API relationship Class-Teacher
+            // modelBuilder.Entity<Class>()
+            // .HasOne(t => t.Teacher)
+            // .WithOne(c => c.Class)
+            // .HasForeignKey<Teacher>(t => t.ClassId)
+            // .IsRequired();
             // Fluent API relationship Class-Student
             modelBuilder.Entity<Class>()
             .HasMany(c => c.Students)
             .WithOne(st => st.Class)
-            .HasForeignKey(st => st.ClassId)
-            .IsRequired();
+            .HasForeignKey(st => st.ClassId);
 
             // Fluent API relationship Student-Course
             modelBuilder.Entity<StudentCourse>()
             .HasKey(sc => new { sc.StudentId, sc.CourseId });
 
-            modelBuilder.Entity<StudentCourse>()
-            .HasOne(s => s.Student)
-            .WithMany(sc => sc.StudentCourses)
-            .HasForeignKey(s => s.StudentId)
-            .IsRequired();
+            // modelBuilder.Entity<StudentCourse>()
+            // .HasOne(s => s.Student)
+            // .WithMany(sc => sc.StudentCourses)
+            // .HasForeignKey(s => s.StudentId)
+            // .IsRequired();
 
-            modelBuilder.Entity<StudentCourse>()
-            .HasOne(c => c.Course)
-            .WithMany(sc => sc.StudentCourses)
-            .HasForeignKey(c => c.CourseId)
-            .IsRequired();
+            // modelBuilder.Entity<StudentCourse>()
+            // .HasOne(c => c.Course)
+            // .WithMany(sc => sc.StudentCourses)
+            // .HasForeignKey(c => c.CourseId)
+            // .IsRequired();
         }
 
     }

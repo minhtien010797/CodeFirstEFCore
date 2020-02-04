@@ -41,11 +41,11 @@ namespace CodeFirstEFCore.Controllers
         }
 
         [HttpPost]
-        public ActionResult Post([FromBody]StudentInput student)
+        public ActionResult Post([FromBody]StudentResource student)
         {
             if (!ModelState.IsValid)
                 return BadRequest("Data Invalid.");
-            // _studentService.add(student);
+            _studentService.add(student);
             return Ok();
         }
 

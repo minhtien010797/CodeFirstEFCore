@@ -10,7 +10,7 @@
     </mat-form-field>
     <p>Fill Score:</p>
     <mat-form-field>
-      <input matInput [(ngModel)]="data.score">
+      <input type="number" min="0" max="10" matInput [(ngModel)]="data.score">
     </mat-form-field>
 </div>
 <div mat-dialog-actions>

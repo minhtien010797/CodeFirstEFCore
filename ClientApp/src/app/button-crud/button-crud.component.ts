@@ -8,7 +8,6 @@ export interface DialogData {
   score: number
 }
 
-
 @Component({
   selector: 'app-button-crud',
   templateUrl: './button-crud.component.html',
@@ -52,22 +51,13 @@ export class ButtonCRUDComponent{
   }
   // public editStudent(){
   // }
-  // public deleteStudent(){
-  // }
+
+  public deleteStudent(){
+    this.http.delete<any>(this.baseUrl + 'api/students'+'/'+ id).subscribe(result => {
+      console.log('Delete student successfully !!!!!');
+    });
+  }
 }
-
-// export class StudentModel{
-//   constructor(firstName?: string, lastName?: string, score?: number) {
-
-//     this.firstName = firstName;
-//     this.lastName = lastName;
-//     this.score = score;
-//   }
-
-//   public firstName: string;
-//   public lastName: string;
-//   public score: number;
-// }
 
 @Component({
   selector: 'dialog-button-create',
