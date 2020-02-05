@@ -34,6 +34,7 @@ namespace CodeFirstEFCore.Context
             // .WithOne(c => c.Class)
             // .HasForeignKey<Teacher>(t => t.ClassId)
             // .IsRequired();
+
             // Fluent API relationship Class-Student
             modelBuilder.Entity<Class>()
             .HasMany(c => c.Students)

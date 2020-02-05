@@ -5,11 +5,11 @@ namespace CodeFirstEFCore.Service
 {
     public interface IStudentService
     {
-        List<StudentResource> getAll();
-        List<StudentResource> getByClass(string className);
-        StudentResource getById(int id);
-        bool add(StudentResource student);
-        bool update(StudentResource student);
+        List<StudentResourceDTO> getAll();
+        List<StudentResourceDTO> getByClass(string className);
+        StudentResourceDTO getById(int id);
+        bool add(StudentResourceInput student);
+        bool update(StudentResourceInput student);
         bool delete(int id);
     }
 }

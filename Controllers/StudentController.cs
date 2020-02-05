@@ -16,21 +16,21 @@ namespace CodeFirstEFCore.Controllers
         }
 
         [HttpGet]
-        public List<StudentResource> GetAllStudents()
+        public List<StudentResourceDTO> GetAllStudents()
         {
             var studentList = _studentService.getAll();
             return studentList;
         }
 
         [HttpGet("class/{className}")]
-        public List<StudentResource> GetAllByClassName(string className)
+        public List<StudentResourceDTO> GetAllByClassName(string className)
         {
             var studentList = _studentService.getByClass(className);
             return studentList;
         }
 
         [HttpGet("{id}")]
-        public ActionResult<StudentResource> GetStudentById(int id)
+        public ActionResult<StudentResourceDTO> GetStudentById(int id)
         {
             var std = _studentService.getById(id);
             if (std == null)
@@ -41,7 +41,7 @@ namespace CodeFirstEFCore.Controllers
         }
 
         [HttpPost]
-        public ActionResult Post([FromBody]StudentResource student)
+        public ActionResult Post([FromBody]StudentResourceInput student)
         {
             if (!ModelState.IsValid)
                 return BadRequest("Data Invalid.");
@@ -50,7 +50,7 @@ namespace CodeFirstEFCore.Controllers
         }
 
         [HttpPut("{id}")]
-        public ActionResult<StudentResource> Put(StudentResource student)
+        public ActionResult<StudentResourceInput> Put([FromBody]StudentResourceInput student)
         {
             if (!ModelState.IsValid)
             {

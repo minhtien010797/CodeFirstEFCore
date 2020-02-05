@@ -2,7 +2,6 @@ import { Component, Input, OnInit, OnChanges, ViewChild, SimpleChange, SimpleCha
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { debug } from 'util';
 
 @Component({
   selector: 'data-table',
@@ -11,9 +10,11 @@ import { debug } from 'util';
 })
 
 export class DataTableComponent implements OnChanges {
+
   @Input() dataSource: any;
   @Input() columns: any;
   listData: any;
+  rowSelected: any;
 
   displayedColumns: string[] = ['select', 'firstName', 'lastName', 'score'];
 
@@ -44,6 +45,8 @@ export class DataTableComponent implements OnChanges {
     else{
       this.dataSource.forEach((row: any) => this.selection.select(row));
     }
+    this.rowSelected = this.selection.selected;
+    console.log(this.rowSelected);
   }
 
   checkboxLabel(row?: any): string {

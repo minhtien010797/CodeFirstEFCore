@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CodeFirstEFCore.Migrations
 {
     [DbContext(typeof(SchoolContext))]
-    [Migration("20200204064931_EditStudentEntity")]
+    [Migration("20200205071937_EditStudentEntity")]
     partial class EditStudentEntity
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

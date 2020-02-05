@@ -19,9 +19,7 @@ export class ButtonCRUDComponent{
   firstName: string;
   lastName: string;
   score: number;
-
   dataInput: any;
-
 
   private headers = {
     headers: new HttpHeaders({
@@ -52,11 +50,11 @@ export class ButtonCRUDComponent{
   // public editStudent(){
   // }
 
-  public deleteStudent(){
-    this.http.delete<any>(this.baseUrl + 'api/students'+'/'+ id).subscribe(result => {
-      console.log('Delete student successfully !!!!!');
-    });
-  }
+  // public deleteStudent(){
+  //   this.http.delete<any>(this.baseUrl + 'api/students'+'/'+ id).subscribe(result => {
+  //     console.log('Delete student successfully !!!!!');
+  //   });
+  // }
 }
 
 @Component({

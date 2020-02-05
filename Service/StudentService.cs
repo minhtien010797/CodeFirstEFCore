@@ -14,10 +14,11 @@ namespace CodeFirstEFCore.Service
         {
             _studentManager = studentManager;
         }
-        public bool add(StudentResource student)
+        public bool add(StudentResourceInput student)
         {
             _studentManager.add(new Student
             {
+                Id = student.Id,
                 FirstName = student.FirstName,
                 LastName = student.LastName,
                 Score = student.Score
@@ -33,48 +34,57 @@ namespace CodeFirstEFCore.Service
             return true;
         }
 
-        public List<StudentResource> getAll()
+        public List<StudentResourceDTO> getAll()
         {
-            return _studentManager.get().Select(s => new StudentResource
+            return _studentManager.get().Select(s => new StudentResourceDTO
             {
+                Id = s.Id,
                 FirstName = s.FirstName,
                 LastName = s.LastName,
                 Score = s.Score
             }).ToList();
         }
 
-        public List<StudentResource> getByClass(string className)
+        public List<StudentResourceDTO> getByClass(string className)
         {
             return _studentManager.get().Where(s => s.Class.ClassName == className).Select(
-                s => new StudentResource
+                s => new StudentResourceDTO
                 {
+                    Id = s.Id,
                     FirstName = s.FirstName,
                     LastName = s.LastName,
                     Score = s.Score
                 }).ToList();
         }
 
-        public StudentResource getById(int id)
+        public StudentResourceInput getById(int id)
         {
             var student = _studentManager.get().FirstOrDefault(t => t.Id == id);
-            return new StudentResource
+            return new StudentResourceInput
             {
+                Id = student.Id,
                 FirstName = student.FirstName,
                 LastName = student.LastName,
                 Score = student.Score
             };
         }
 
-        public bool update(StudentResource student)
+        public bool update(StudentResourceInput student)
         {
             _studentManager.update(new Student
             {
+                Id = student.Id,
                 FirstName = student.FirstName,
                 LastName = student.LastName,
                 Score = student.Score
             });
             _studentManager.SaveChange();
             return true;
+        }
+
+        StudentResourceDTO IStudentService.getById(int id)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }
