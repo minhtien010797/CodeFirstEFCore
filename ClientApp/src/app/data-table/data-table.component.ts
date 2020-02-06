@@ -14,7 +14,7 @@ export class DataTableComponent implements OnChanges {
   @Input() dataSource: any;
   @Input() columns: any;
   listData: any;
-  rowSelected: any;
+  rowSelected: any[]=[];
 
   displayedColumns: string[] = ['select', 'firstName', 'lastName', 'score'];
 
@@ -42,17 +42,18 @@ export class DataTableComponent implements OnChanges {
     if (this.isAllSelected()) {
       this.selection.clear()
     }
-    else{
+    else {
       this.dataSource.forEach((row: any) => this.selection.select(row));
     }
-    this.rowSelected = this.selection.selected;
-    console.log(this.rowSelected);
   }
 
   checkboxLabel(row?: any): string {
     if (!row) {
       return `${this.isAllSelected() ? 'select' : 'deselect'} all`;
     }
-    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.position + 1}`;
+    else {
+      this.rowSelected.push(row);
+      return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.position + 1}`;
+    }
   }
 }

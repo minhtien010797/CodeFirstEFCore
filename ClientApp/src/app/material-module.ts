@@ -42,14 +42,15 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTreeModule} from '@angular/material/tree';
 import { CommonModule } from '@angular/common';
 import { DataTableComponent } from './data-table/data-table.component';
-import { ButtonCRUDComponent, DialogButtonCreate } from './button-crud/button-crud.component';
+import { ButtonCRUDComponent, DialogButtonCreate, DialogButtonDelete } from './button-crud/button-crud.component';
 import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     DataTableComponent,
     ButtonCRUDComponent,
-    DialogButtonCreate
+    DialogButtonCreate,
+    DialogButtonDelete 
   ],
   imports:[
     MatTableModule,
@@ -60,7 +61,11 @@ import { FormsModule } from '@angular/forms';
     FormsModule,
     MatInputModule
   ],
-  entryComponents: [ButtonCRUDComponent, DialogButtonCreate],
+  entryComponents: [
+    ButtonCRUDComponent, 
+    DialogButtonCreate, 
+    DialogButtonDelete
+  ],
   exports: [
     DataTableComponent,
     A11yModule,

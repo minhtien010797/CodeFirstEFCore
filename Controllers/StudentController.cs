@@ -63,14 +63,14 @@ namespace CodeFirstEFCore.Controllers
 
         [HttpDelete("{id}")]
         public ActionResult Delete(int id)
-        {    
+        {
             if (!ModelState.IsValid)
             {
                 return BadRequest();
             }
 
-            _studentService.delete(id);
-            return Ok();
+                _studentService.delete(id);
+                return Ok();
         }
 
     }

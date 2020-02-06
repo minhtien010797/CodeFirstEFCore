@@ -1,6 +1,6 @@
 import { Component, Input, Inject } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 export interface DialogData {
   firstName: string;
@@ -13,9 +13,10 @@ export interface DialogData {
   templateUrl: './button-crud.component.html',
   styleUrls: ['./button-crud.component.css']
 })
-export class ButtonCRUDComponent{
+export class ButtonCRUDComponent {
   @Input() data: any;
-  
+  @Input() rowSelected: any;
+
   firstName: string;
   lastName: string;
   score: number;
@@ -29,33 +30,53 @@ export class ButtonCRUDComponent{
 
   constructor(public dialog: MatDialog, private http: HttpClient, @Inject('BASE_URL') private baseUrl: string) { }
 
-  openCreateForm(): void{
+  openCreateForm(): void {
     const dialogRef = this.dialog.open(DialogButtonCreate, {
       width: '500px',
-      data: {firstName: this.firstName, lastName: this.lastName, score: this.score}
+      data: { firstName: this.firstName, lastName: this.lastName, score: this.score }
     });
 
     dialogRef.afterClosed().subscribe(result => {
       this.dataInput = result;
-      if(this.dataInput !== null)
-      {
-        this.http.post<any>(this.baseUrl + 'api/students',  this.dataInput, this.headers).subscribe(result => {
+      if (this.dataInput !== null) {
+        this.http.post<any>(this.baseUrl + 'api/students', this.dataInput, this.headers).subscribe(result => {
           console.log('Add new student successfully !!!!!');
         });
       }
-      console.log(result);
-      debugger;
     });
   }
   // public editStudent(){
   // }
 
-  // public deleteStudent(){
-  //   this.http.delete<any>(this.baseUrl + 'api/students'+'/'+ id).subscribe(result => {
-  //     console.log('Delete student successfully !!!!!');
-  //   });
-  // }
+  public deleteStudent() {
+    const dialogRef = this.dialog.open(DialogButtonDelete);
+
+    dialogRef.afterClosed().subscribe(confirmresult=>{  
+      console.log(confirmresult);  
+      if(confirmresult){
+        this.delete();  
+        console.log("Delete confirm is approved by user.");  
+      }  
+      else{
+        console.log("Delete confirm is cancelled by user.");  
+      }  
+    })
+  }
+
+  public delete() {
+    if (this.rowSelected !== null) {
+      this.rowSelected.forEach(std => {
+        console.log("AAAAAAAAAAAA");
+        // this.http.delete<any>(this.baseUrl + 'api/students' + '/' + std.id).subscribe(result => {
+        //   console.log('Delete student successfully !!!!!');
+        // });
+      });
+    }
+  }
+
 }
+
+
 
 @Component({
   selector: 'dialog-button-create',
@@ -65,9 +86,17 @@ export class DialogButtonCreate {
 
   constructor(
     public dialogRef: MatDialogRef<DialogButtonCreate>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
+    @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
 
   onNoClick(): void {
     this.dialogRef.close();
   }
+}
+
+@Component({
+  selector: 'dialog-button-delete',
+  templateUrl: 'dialog-button-delete.html',
+})
+export class DialogButtonDelete {
+  constructor(@Inject(MAT_DIALOG_DATA) public data:any) { }
 }
