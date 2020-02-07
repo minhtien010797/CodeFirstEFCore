@@ -53,6 +53,7 @@ export class DataTableComponent implements OnChanges {
     }
     else {
       this.rowSelected.push(row);
+      const arrSelected = this.selection.selected;
       return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.position + 1}`;
     }
   }

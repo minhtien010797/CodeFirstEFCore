@@ -45,37 +45,42 @@ export class ButtonCRUDComponent {
       }
     });
   }
-  // public editStudent(){
-  // }
 
   public deleteStudent() {
     const dialogRef = this.dialog.open(DialogButtonDelete);
 
-    dialogRef.afterClosed().subscribe(confirmresult=>{  
-      console.log(confirmresult);  
-      if(confirmresult){
-        this.delete();  
-        console.log("Delete confirm is approved by user.");  
-      }  
-      else{
-        console.log("Delete confirm is cancelled by user.");  
-      }  
+    dialogRef.afterClosed().subscribe(confirmresult => {
+      if (confirmresult) {
+        if (this.rowSelected.length !== 0) {
+          this.rowSelected.forEach(std => {
+            console.log("AAAAAAAAAAAA");
+            // this.http.delete<any>(this.baseUrl + 'api/students' + '/' + std.id).subscribe(result => {
+            //   console.log('Delete student successfully !!!!!');
+            // });
+          });
+        }
+        else {
+          this.dialog.open(DialogError);
+        }
+        console.log("Delete confirm is approved by user.");
+      }
+      else {
+        console.log("Delete confirm is cancelled by user.");
+      }
     })
   }
 
-  public delete() {
-    if (this.rowSelected !== null) {
-      this.rowSelected.forEach(std => {
-        console.log("AAAAAAAAAAAA");
-        // this.http.delete<any>(this.baseUrl + 'api/students' + '/' + std.id).subscribe(result => {
-        //   console.log('Delete student successfully !!!!!');
-        // });
-      });
+  public editStudent() {
+    if (this.rowSelected.length == 1) {
+      const dialogRef = this.dialog.open(DialogButtonEdit);
+
+      
+    }
+    else {
+      this.dialog.open(DialogError);
     }
   }
-
 }
-
 
 
 @Component({
@@ -98,5 +103,33 @@ export class DialogButtonCreate {
   templateUrl: 'dialog-button-delete.html',
 })
 export class DialogButtonDelete {
-  constructor(@Inject(MAT_DIALOG_DATA) public data:any) { }
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any) { }
+}
+
+@Component({
+  selector: 'dialog-button-edit',
+  templateUrl: 'dialog-button-edit.html',
+})
+export class DialogButtonEdit {
+  constructor(
+    public dialogRef: MatDialogRef<DialogButtonEdit>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+}
+
+@Component({
+  selector: 'dialog-error',
+  templateUrl: 'dialog-error.html',
+})
+export class DialogError {
+  constructor(
+    public dialogRef: MatDialogRef<DialogError>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
 }
