@@ -15,7 +15,7 @@ export interface DialogData {
 })
 export class ButtonCRUDComponent {
   @Input() data: any;
-  @Input() rowSelected: any;
+  @Input() selectedRows: any;
 
   firstName: string;
   lastName: string;
@@ -49,10 +49,10 @@ export class ButtonCRUDComponent {
   public deleteStudent() {
     const dialogRef = this.dialog.open(DialogButtonDelete);
 
-    dialogRef.afterClosed().subscribe(confirmresult => {
-      if (confirmresult) {
-        if (this.rowSelected.length !== 0) {
-          this.rowSelected.forEach(std => {
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        if (this.selectedRows.length !== 0) {
+          this.selectedRows.forEach(std => {
             console.log("AAAAAAAAAAAA");
             // this.http.delete<any>(this.baseUrl + 'api/students' + '/' + std.id).subscribe(result => {
             //   console.log('Delete student successfully !!!!!');
@@ -71,10 +71,22 @@ export class ButtonCRUDComponent {
   }
 
   public editStudent() {
-    if (this.rowSelected.length == 1) {
-      const dialogRef = this.dialog.open(DialogButtonEdit);
+    if (this.selectedRows.length == 1) {
+      const dialogRef = this.dialog.open(DialogButtonEdit, {
+        width: '500px',
+        data: { firstName: this.selectedRows.firstName, lastName: this.selectedRows.lastName, score: this.selectedRows.score }
+      });
 
-      
+      dialogRef.afterClosed().subscribe(dataEdit => {
+        if (dataEdit) {
+          this.selectedRows.forEach(std => {
+            dataEdit.id = std.id;
+            this.http.put<any>(this.baseUrl + 'api/students' + '/' + std.id, dataEdit).subscribe(result => {
+              console.log('Edit student successfully !!!!!');
+            });
+          });
+        }
+      })
     }
     else {
       this.dialog.open(DialogError);
@@ -88,7 +100,6 @@ export class ButtonCRUDComponent {
   templateUrl: 'dialog-button-create.html',
 })
 export class DialogButtonCreate {
-
   constructor(
     public dialogRef: MatDialogRef<DialogButtonCreate>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
@@ -103,7 +114,7 @@ export class DialogButtonCreate {
   templateUrl: 'dialog-button-delete.html',
 })
 export class DialogButtonDelete {
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any) { }
+  constructor() { }
 }
 
 @Component({
@@ -111,9 +122,13 @@ export class DialogButtonDelete {
   templateUrl: 'dialog-button-edit.html',
 })
 export class DialogButtonEdit {
+  dataModel: any;
   constructor(
     public dialogRef: MatDialogRef<DialogButtonEdit>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
+    @Inject(MAT_DIALOG_DATA) public data: DialogData) {
+      this.dataModel = data;
+      console.log(data);
+    }
 
   onNoClick(): void {
     this.dialogRef.close();
@@ -126,8 +141,7 @@ export class DialogButtonEdit {
 })
 export class DialogError {
   constructor(
-    public dialogRef: MatDialogRef<DialogError>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
+    public dialogRef: MatDialogRef<DialogError>) { }
 
   onNoClick(): void {
     this.dialogRef.close();

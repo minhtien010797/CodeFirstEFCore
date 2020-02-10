@@ -14,7 +14,7 @@ export class DataTableComponent implements OnChanges {
   @Input() dataSource: any;
   @Input() columns: any;
   listData: any;
-  rowSelected: any[]=[];
+  selectedRows: any[]=[];
 
   displayedColumns: string[] = ['select', 'firstName', 'lastName', 'score'];
 
@@ -29,6 +29,7 @@ export class DataTableComponent implements OnChanges {
     if (changes.dataSource) {
       this.listData = new MatTableDataSource<any>(this.dataSource);
       this.listData.paginator = this.paginator;
+      this.selectedRows = this.selection.selected;
     }
   }
 
@@ -48,13 +49,17 @@ export class DataTableComponent implements OnChanges {
   }
 
   checkboxLabel(row?: any): string {
+    this.selectedRows = this.selection.selected;
     if (!row) {
       return `${this.isAllSelected() ? 'select' : 'deselect'} all`;
     }
     else {
-      this.rowSelected.push(row);
-      const arrSelected = this.selection.selected;
       return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.position + 1}`;
     }
   }
+
+  addItem(row?: any){
+    this.selectedRows = this.selection.selected;
+  }
+
 }

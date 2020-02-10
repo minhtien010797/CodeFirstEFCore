@@ -37,7 +37,7 @@ namespace CodeFirstEFCore.Manager
             var std = _schoolContext.Students.FirstOrDefault(c => c.Id == student.Id);
             std.FirstName = student.FirstName;
             std.LastName = student.LastName;
-            std.Score = std.Score;
+            std.Score = student.Score;
         }
     }
 }
