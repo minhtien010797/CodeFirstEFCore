@@ -1,3 +1,4 @@
+import { DialogInform } from './dialog-inform/dialog-inform';
 import {NgModule} from '@angular/core';
 import {A11yModule} from '@angular/cdk/a11y';
 import {DragDropModule} from '@angular/cdk/drag-drop';
@@ -42,8 +43,11 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTreeModule} from '@angular/material/tree';
 import { CommonModule } from '@angular/common';
 import { DataTableComponent } from './data-table/data-table.component';
-import { ButtonCRUDComponent, DialogButtonCreate, DialogButtonDelete, DialogButtonEdit, DialogError } from './button-crud/button-crud.component';
+import { ButtonCRUDComponent} from './button-crud/button-crud.component';
 import { FormsModule } from '@angular/forms';
+import { DialogButtonCreate } from './dialog-button-create/dialog-button-create';
+import { DialogButtonDelete } from './dialog-button-delete/dialog-button-delete';
+import { DialogButtonEdit } from './dialog-button-edit/dialog-button-edit';
 
 @NgModule({
   declarations: [
@@ -52,7 +56,7 @@ import { FormsModule } from '@angular/forms';
     DialogButtonCreate,
     DialogButtonDelete,
     DialogButtonEdit,
-    DialogError
+    DialogInform
   ],
   imports:[
     MatTableModule,
@@ -68,7 +72,7 @@ import { FormsModule } from '@angular/forms';
     DialogButtonCreate, 
     DialogButtonDelete,
     DialogButtonEdit,
-    DialogError,
+    DialogInform,
   ],
   exports: [
     DataTableComponent,

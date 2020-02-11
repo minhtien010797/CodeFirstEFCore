@@ -37,9 +37,7 @@ export class StudentComponent {
       }
     ]
   }
-
 }
-
 
 interface ColumnHeader {
   name: string;

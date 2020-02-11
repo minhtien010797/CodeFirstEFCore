@@ -1,6 +1,11 @@
 import { Component, Input, Inject } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { DialogButtonCreate } from '../dialog-button-create/dialog-button-create';
+import { DialogButtonDelete } from '../dialog-button-delete/dialog-button-delete';
+import { DialogButtonEdit } from '../dialog-button-edit/dialog-button-edit';
+import { DialogInform } from '../dialog-inform/dialog-inform';
+import { withModule } from '@angular/core/testing';
 
 export interface DialogData {
   firstName: string;
@@ -40,7 +45,10 @@ export class ButtonCRUDComponent {
       this.dataInput = result;
       if (this.dataInput !== null) {
         this.http.post<any>(this.baseUrl + 'api/students', this.dataInput, this.headers).subscribe(result => {
-          console.log('Add new student successfully !!!!!');
+          this.dialog.open(DialogInform, {
+            width: '500px',
+            data:{title: 'Inform', content:'Add new student successfully !!!!!'}
+          });
         });
       }
     });
@@ -53,14 +61,19 @@ export class ButtonCRUDComponent {
       if (result) {
         if (this.selectedRows.length !== 0) {
           this.selectedRows.forEach(std => {
-            console.log("AAAAAAAAAAAA");
-            // this.http.delete<any>(this.baseUrl + 'api/students' + '/' + std.id).subscribe(result => {
-            //   console.log('Delete student successfully !!!!!');
-            // });
+            this.http.delete<any>(this.baseUrl + 'api/students' + '/' + std.id).subscribe(result => {
+              this.dialog.open(DialogInform, {
+                width: '500px',
+                data:{title: 'Inform', content:'Delete student successfully !!!!!'}
+              });
+            });
           });
         }
         else {
-          this.dialog.open(DialogError);
+          this.dialog.open(DialogInform, {
+            width: '500px',
+            data:{title: 'Error', content:'You must choose one or more student to delete !!!!'}
+          });
         }
         console.log("Delete confirm is approved by user.");
       }
@@ -74,7 +87,7 @@ export class ButtonCRUDComponent {
     if (this.selectedRows.length == 1) {
       const dialogRef = this.dialog.open(DialogButtonEdit, {
         width: '500px',
-        data: { firstName: this.selectedRows.firstName, lastName: this.selectedRows.lastName, score: this.selectedRows.score }
+        data: { firstName: this.selectedRows[0].firstName, lastName: this.selectedRows[0].lastName, score: this.selectedRows[0].score }
       });
 
       dialogRef.afterClosed().subscribe(dataEdit => {
@@ -82,68 +95,31 @@ export class ButtonCRUDComponent {
           this.selectedRows.forEach(std => {
             dataEdit.id = std.id;
             this.http.put<any>(this.baseUrl + 'api/students' + '/' + std.id, dataEdit).subscribe(result => {
-              console.log('Edit student successfully !!!!!');
+              this.dialog.open(DialogInform, {
+                width: '500px',
+                data:{title: 'Inform', content:'Edit student successfully !!!!!'}
+              });
+              this.reloadPage();
             });
           });
         }
       })
     }
     else {
-      this.dialog.open(DialogError);
+      this.dialog.open(DialogInform, {
+        width: '500px',
+        data:{title: 'Error', content:'You can not choose more 2 students to edit !!!!'}
+      });
+
+      return 
     }
   }
-}
 
-
-@Component({
-  selector: 'dialog-button-create',
-  templateUrl: 'dialog-button-create.html',
-})
-export class DialogButtonCreate {
-  constructor(
-    public dialogRef: MatDialogRef<DialogButtonCreate>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
-
-  onNoClick(): void {
-    this.dialogRef.close();
+  public reloadPage(){
+    return this.http.get<any>(this.baseUrl + 'api/students').subscribe(result=>{
+      this.data = result;
+    });
   }
+
 }
-
-@Component({
-  selector: 'dialog-button-delete',
-  templateUrl: 'dialog-button-delete.html',
-})
-export class DialogButtonDelete {
-  constructor() { }
-}
-
-@Component({
-  selector: 'dialog-button-edit',
-  templateUrl: 'dialog-button-edit.html',
-})
-export class DialogButtonEdit {
-  dataModel: any;
-  constructor(
-    public dialogRef: MatDialogRef<DialogButtonEdit>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData) {
-      this.dataModel = data;
-      console.log(data);
-    }
-
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
-}
-
-@Component({
-  selector: 'dialog-error',
-  templateUrl: 'dialog-error.html',
-})
-export class DialogError {
-  constructor(
-    public dialogRef: MatDialogRef<DialogError>) { }
-
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
-}
+  
