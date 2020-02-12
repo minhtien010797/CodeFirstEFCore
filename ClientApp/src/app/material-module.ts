@@ -65,7 +65,8 @@ import { DialogButtonEdit } from './dialog-button-edit/dialog-button-edit';
     MatPaginatorModule,
     MatDialogModule,
     FormsModule,
-    MatInputModule
+    MatInputModule,
+    MatIconModule
   ],
   entryComponents: [
     ButtonCRUDComponent, 

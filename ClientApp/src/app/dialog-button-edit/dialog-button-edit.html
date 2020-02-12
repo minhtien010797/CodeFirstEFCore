@@ -1,15 +1,17 @@
 <h1 mat-dialog-title>Edit Student</h1>
 <div mat-dialog-content>
-    <p>Fill First Name:</p>
     <mat-form-field>
+      <mat-label>Fill First Name:</mat-label>
       <input matInput [(ngModel)]="data.firstName">
     </mat-form-field>
-    <p>Fill Last Name:</p>
+    <br>
     <mat-form-field>
+      <mat-label>Fill Last Name:</mat-label>
       <input matInput [(ngModel)]="data.lastName">
     </mat-form-field>
-    <p>Fill Score:</p>
+    <br>
     <mat-form-field>
+      <mat-label>Fill Score:</mat-label>
       <input type="number" min="0" max="10" matInput [(ngModel)]="data.score" >
     </mat-form-field>
 </div>

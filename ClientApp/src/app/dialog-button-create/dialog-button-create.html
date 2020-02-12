@@ -1,16 +1,21 @@
 <h1 mat-dialog-title>Add New Student</h1>
 <div mat-dialog-content>
-    <p>Fill First Name:</p>
     <mat-form-field>
-      <input matInput [(ngModel)]="data.firstName">
+      <mat-label>Fill First Name:</mat-label>
+      <input matInput required pattern="^$" [(ngModel)]="data.firstName" >
+      <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
     </mat-form-field>
-    <p>Fill Last Name:</p>
+    <br>
     <mat-form-field>
+      <mat-label>Fill Last Name:</mat-label>
       <input matInput [(ngModel)]="data.lastName">
+      <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
     </mat-form-field>
-    <p>Fill Score:</p>
+    <br>
     <mat-form-field>
+      <mat-label>Fill Score:</mat-label>
       <input type="number" min="0" max="10" matInput [(ngModel)]="data.score">
+      <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
     </mat-form-field>
 </div>
 <div mat-dialog-actions>
