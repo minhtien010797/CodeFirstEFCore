@@ -6,6 +6,7 @@ import { DialogButtonDelete } from '../dialog-button-delete/dialog-button-delete
 import { DialogButtonEdit } from '../dialog-button-edit/dialog-button-edit';
 import { DialogInform } from '../dialog-inform/dialog-inform';
 import { withModule } from '@angular/core/testing';
+import { FormControl } from '@angular/forms';
 
 export interface DialogData {
   firstName: string;
@@ -99,7 +100,6 @@ export class ButtonCRUDComponent {
                 width: '500px',
                 data:{title: 'Inform', content:'Edit student successfully !!!!!'}
               });
-              this.reloadPage();
             });
           });
         }
@@ -115,10 +115,8 @@ export class ButtonCRUDComponent {
     }
   }
 
-  public reloadPage(){
-    return this.http.get<any>(this.baseUrl + 'api/students').subscribe(result=>{
-      this.data = result;
-    });
+  public validateCreateForm(control:FormControl){
+    
   }
 
 }

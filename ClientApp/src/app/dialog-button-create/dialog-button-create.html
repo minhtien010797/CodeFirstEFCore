@@ -2,13 +2,29 @@
 <div mat-dialog-content>
     <mat-form-field>
       <mat-label>Fill First Name:</mat-label>
-      <input matInput required pattern="^$" [(ngModel)]="data.firstName" >
+      <input matInput [(ngModel)]="data.firstName" #firstName ="ngModel" required>
+      <div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)" class="alert alert-danger">
+        <div *ngIf="firstName.errors.required">
+          First Name is required !!!
+        </div>
+        <div *ngIf="firstName.errors.minlength">
+          First Name must be  !!!
+        </div>
+      </div>
       <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
     </mat-form-field>
     <br>
     <mat-form-field>
       <mat-label>Fill Last Name:</mat-label>
-      <input matInput [(ngModel)]="data.lastName">
+      <input matInput [(ngModel)]="data.lastName" #lastName ="ngModel" required>
+      <div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)" class="alert alert-danger">
+        <div *ngIf="lastName.errors.required">
+          First Name is required !!!
+        </div>
+        <div *ngIf="lastName.errors.minlength">
+          First Name must be  !!!
+        </div>
+      </div>
       <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
     </mat-form-field>
     <br>
