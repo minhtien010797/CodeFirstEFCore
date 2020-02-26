@@ -50,6 +50,17 @@ namespace CodeFirstEFCore
             services.AddScoped<IClassService, ClassService>();
             services.AddScoped<IStudentFailedService, StudentFailedService>();
 
+            // Enable Cross-Origin Requests (CORS)
+            services.AddCors(options =>
+            {
+                options.AddPolicy("EnableCORS", builder =>
+                {
+                    builder.AllowAnyOrigin()
+           .AllowAnyHeader()
+           .AllowAnyMethod();
+                });
+            });
+
             // add JWT support
             services.AddAuthentication(opt =>
             {
@@ -96,6 +107,9 @@ namespace CodeFirstEFCore
             }
 
             app.UseRouting();
+
+            // add CORS
+            app.UseCors("EnableCORS");
 
             // configure 
             app.UseAuthentication();
