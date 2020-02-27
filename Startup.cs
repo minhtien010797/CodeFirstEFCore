@@ -56,8 +56,8 @@ namespace CodeFirstEFCore
                 options.AddPolicy("EnableCORS", builder =>
                 {
                     builder.AllowAnyOrigin()
-           .AllowAnyHeader()
-           .AllowAnyMethod();
+                        .AllowAnyHeader()
+                        .AllowAnyMethod();
                 });
             });
 

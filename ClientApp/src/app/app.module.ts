@@ -1,3 +1,4 @@
+import { AuthGuard } from './guards/auth-guard.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -12,8 +13,16 @@ import { StudentComponent } from './student/student.component';
 import { JwPaginationComponent } from 'jw-angular-pagination';
 import { DataTableComponent } from './data-table/data-table.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MaterialModule} from './material-module';
+import { MaterialModule } from './material-module';
 import { CommonModule } from '@angular/common';
+
+import { JwtModule } from "@auth0/angular-jwt";
+import { CustomersComponent } from './customers/customers.component';
+import { LoginComponent } from './login/login.component';
+
+export function tokenGetter() {
+  return localStorage.getItem("jwt");
+}
 
 @NgModule({
   declarations: [
@@ -24,6 +33,8 @@ import { CommonModule } from '@angular/common';
     FetchDataComponent,
     StudentComponent,
     JwPaginationComponent,
+    LoginComponent,
+    CustomersComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -32,16 +43,27 @@ import { CommonModule } from '@angular/common';
     MaterialModule,
     CommonModule,
     RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' },
+      { path: '', component: HomeComponent , pathMatch:'full' },
       { path: 'counter', component: CounterComponent },
       { path: 'fetch-data', component: FetchDataComponent },
       { path: 'student', component: StudentComponent },
       // { path: 'button-crud', component: ButtonCRUDComponent },
       { path: 'data-table', component: DataTableComponent },
+      
+      { path: 'login', component: LoginComponent },
+      { path: 'customers', component: CustomersComponent, canActivate: [AuthGuard] },
     ]),
+    
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter,
+        whitelistedDomains: ["localhost:5000"],
+        blacklistedRoutes: []
+      }
+    }),
     BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
