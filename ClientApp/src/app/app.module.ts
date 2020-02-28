@@ -1,3 +1,4 @@
+import { JwtHelper } from 'angular2-jwt';
 import { AuthGuard } from './guards/auth-guard.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -43,12 +44,12 @@ export function tokenGetter() {
     MaterialModule,
     CommonModule,
     RouterModule.forRoot([
-      { path: '', component: HomeComponent , pathMatch:'full' },
-      { path: 'counter', component: CounterComponent },
-      { path: 'fetch-data', component: FetchDataComponent },
-      { path: 'student', component: StudentComponent },
+      { path: '', component: HomeComponent , pathMatch:'full', canActivate: [AuthGuard] },
+      { path: 'counter', component: CounterComponent, canActivate: [AuthGuard] },
+      { path: 'fetch-data', component: FetchDataComponent, canActivate: [AuthGuard] },
+      { path: 'student', component: StudentComponent, canActivate: [AuthGuard] },
       // { path: 'button-crud', component: ButtonCRUDComponent },
-      { path: 'data-table', component: DataTableComponent },
+      // { path: 'data-table', component: DataTableComponent },
       
       { path: 'login', component: LoginComponent },
       { path: 'customers', component: CustomersComponent, canActivate: [AuthGuard] },
@@ -63,7 +64,7 @@ export function tokenGetter() {
     }),
     BrowserAnimationsModule
   ],
-  providers: [AuthGuard],
+  providers: [AuthGuard, JwtHelper],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
