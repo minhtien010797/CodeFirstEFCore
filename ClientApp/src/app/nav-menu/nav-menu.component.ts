@@ -13,7 +13,7 @@ export class NavMenuComponent {
   isLoggedIn : Observable<boolean>;
 
   constructor( private router: Router, public authService : AuthGuard) {
-    this.isLoggedIn = authService.isLoggedIn();
+    // this.isLoggedIn = authService.isLoggedIn();
   }
 
   collapse() {
