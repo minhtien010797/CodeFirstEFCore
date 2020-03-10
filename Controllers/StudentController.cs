@@ -1,10 +1,12 @@
 using System.Collections.Generic;
 using CodeFirstEFCore.Models;
 using CodeFirstEFCore.Service;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CodeFirstEFCore.Controllers
 {
+    [Produces("application/json")]
     [ApiController]
     [Route("/api/students/")]
     public class StudentController : ControllerBase
@@ -61,7 +63,23 @@ namespace CodeFirstEFCore.Controllers
             return Ok();
         }
 
+        /// <summary>
+        /// Deletes a specific Student.
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     DELETE /api/students/
+        ///     {
+        ///        "id": 1
+        ///     }
+        ///
+        /// </remarks>
+        /// <response code="200">Delete successfully</response>
+        /// <response code="400">If the item is null</response>   
         [HttpDelete("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public ActionResult Delete(int id)
         {
             if (!ModelState.IsValid)
